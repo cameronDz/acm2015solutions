@@ -32,14 +32,14 @@ public class Screen {
 
    public boolean hasHorizontalOverlap(Window window1, Window window2) {
       // Check window 2 overlap left side
-      boolean overlapLeft = (window1.x <= window2.x) && ((window1.x + window1.width) >= window2.x);
-      boolean overlapRight = (window1.x <= (window2.x + window2.width)) && (window1.x >= window2.x);
+      boolean overlapLeft = (window1.x < window2.x) && ((window1.x + window1.width) > window2.x);
+      boolean overlapRight = (window1.x < (window2.x + window2.width)) && (window1.x > window2.x);
       return overlapLeft || overlapRight;
    }
 
    public boolean hasVerticalOverlap(Window window1, Window window2) {
-      boolean overlapTop = (window1.y <= window2.y) && ((window1.y + window1.height) >= window2.y);
-      boolean overlapBottom = (window1.y <= (window2.y + window2.height)) && (window1.y >= window2.y);
+      boolean overlapTop = (window1.y < window2.y) && ((window1.y + window1.height) > window2.y);
+      boolean overlapBottom = (window1.y < (window2.y + window2.height)) && (window1.y > window2.y);
       return overlapTop || overlapBottom;
    }
 
@@ -67,7 +67,7 @@ public class Screen {
          return false;
       } else if ((dy > 0) && ((passedWindow.y + passedWindow.height + 1) > this.height)) {
          return false;
-      } else if ((dy < 0) && ((passedWindow.y + passedWindow.height - 1) < 0)) {
+      } else if ((dy < 0) && ((passedWindow.y - 1) < 0)) {
          return false;
       } else {
          Window potentialWindow = new Window(passedWindow.x + dx, passedWindow.y + dy, passedWindow.width, passedWindow.height);
